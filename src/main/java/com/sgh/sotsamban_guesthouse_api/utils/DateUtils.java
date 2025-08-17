@@ -2,6 +2,8 @@ package com.sgh.sotsamban_guesthouse_api.utils;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
+import java.util.Locale;
 
 public class DateUtils {
 
@@ -85,5 +87,25 @@ public class DateUtils {
     public static String createDateTimeString(int year, int month, int day, int hour, int minute, int second) {
         LocalDateTime dateTime = LocalDateTime.of(year, month, day, hour, minute, second);
         return dateTime.format(DATETIME_FORMATTER);
+    }
+
+    /**
+     * Format YYYYMMDDHHmmss string to "dd MMMM yyyy"
+     * e.g., "20250815225821" -> "15 August 2025"
+     * @param dateTimeString "20250815225821"
+     * @return "15 August 2025"
+     */
+    public static String formatToReadableDate(String dateTimeString) {
+        if (!isValidYYYYMMDDHHmmss(dateTimeString)) {
+            throw new IllegalArgumentException("Invalid datetime format. Expected: yyyyMMddHHmmss");
+        }
+
+        LocalDateTime dateTime = parseToLocalDateTime(dateTimeString);
+
+        int day = dateTime.getDayOfMonth();
+        String month = dateTime.getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH);
+        int year = dateTime.getYear();
+
+        return String.format("%02d %s %d", day, month, year);
     }
 }

@@ -32,11 +32,11 @@ public class RoomServiceImpl implements RoomService {
     public void createRoom(RoomRequest roomRequest) {
 
         if (roomRepository.existsByRoomNumber(roomRequest.getRoomNumber())) {
-            throw new IllegalArgumentException("Room number " + roomRequest.getRoomNumber() + " already exists");
+            throw new BusinessException(StatusCode.ALREADY_EXISTS, "Room number " + roomRequest.getRoomNumber() + " already exist");
         }
 
         RoomType roomType = roomTypeRepository.findById(roomRequest.getRoomTypeId())
-                .orElseThrow(() -> new IllegalArgumentException("Room type not found with ID: " + roomRequest.getRoomTypeId()));
+                .orElseThrow(() -> new BusinessException(StatusCode.NOT_FOUND, "Room type not found"));
 
         Room room = new Room();
         room.setRoomNumber(roomRequest.getRoomNumber());

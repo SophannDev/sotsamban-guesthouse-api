@@ -4,6 +4,8 @@ import com.sgh.sotsamban_guesthouse_api.common.StatusCode;
 import com.sgh.sotsamban_guesthouse_api.domain.roomtype.RoomType;
 import com.sgh.sotsamban_guesthouse_api.domain.roomtype.RoomTypeRepository;
 import com.sgh.sotsamban_guesthouse_api.dto.request.roomtype.RoomTypeRequest;
+import com.sgh.sotsamban_guesthouse_api.dto.response.roomtype.RoomTypeMainResponse;
+import com.sgh.sotsamban_guesthouse_api.dto.response.roomtype.RoomTypeResponse;
 import com.sgh.sotsamban_guesthouse_api.exception.BusinessException;
 import com.sgh.sotsamban_guesthouse_api.service.RoomTypeService;
 import jakarta.transaction.Transactional;
@@ -34,5 +36,25 @@ public class RoomTypeServiceImpl implements RoomTypeService {
 
         roomTypeRepository.save(roomType);
 
+    }
+
+    @Override
+    public Object getRoomType() {
+
+        return roomTypeRepository.findAll();
+        
+//        var listRoomType = allRoomType.stream()
+//                .map(roomType -> RoomTypeResponse
+//                                .builder()
+//                                .roomTypeId(roomType.getRoomTypeId())
+//                                .typeName(roomType.getTypeName())
+//                                .basePrice(roomType.getBasePrice())
+//                                .description(roomType.getDescription())
+//                                .build()
+//                        ).toList();
+//
+//        return RoomTypeMainResponse.builder()
+//                .roomTypes(listRoomType)
+//                .build();
     }
 }

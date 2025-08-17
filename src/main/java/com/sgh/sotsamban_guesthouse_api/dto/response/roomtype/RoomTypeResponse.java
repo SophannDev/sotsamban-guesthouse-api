@@ -2,27 +2,29 @@ package com.sgh.sotsamban_guesthouse_api.dto.response.roomtype;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+@Builder
 @Getter
 @Setter
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class RoomTypeResponse {
 
-    private Integer roomTypeId;
+    private Long roomTypeId;
     private String typeName;
     private String description;
-    private BigDecimal baseRate;
-    private Integer standardOccupancy;
-    private Integer maxOccupancy;
-    private String amenities;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    private BigDecimal basePrice;
 
-    // Include room count
-    private Integer roomCount;
+    @Builder
+    public RoomTypeResponse(Long roomTypeId, String typeName, String description, BigDecimal basePrice) {
+        this.roomTypeId = roomTypeId;
+        this.typeName = typeName;
+        this.description = description;
+        this.basePrice = basePrice;
+    }
 }

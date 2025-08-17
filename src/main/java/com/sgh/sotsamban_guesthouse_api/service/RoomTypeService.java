@@ -7,4 +7,6 @@ public interface RoomTypeService {
 
     void createRoomType(RoomTypeRequest payload);
 
+    Object getRoomType();
+
 }

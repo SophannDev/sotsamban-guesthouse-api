@@ -24,29 +24,17 @@ public class GuestResponse {
 
     private String email;
     private String phone;
-    private String address;
-    private String city;
-    private String state;
-    private String country;
 
-    @JsonProperty("postal_code")
-    private String postalCode;
-
-    @JsonProperty("date_of_birth")
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    private LocalDate dateOfBirth;
-
-    @JsonProperty("id_document_type")
-    private String idDocumentType;
+//    @JsonProperty("id_document_type")
+//    private String idDocumentType;
 
     @JsonProperty("id_document_number")
     private String idDocumentNumber;
 
-    @JsonProperty("created_at")
-    @JsonFormat(pattern = "yyyyMMdd HH:mm:ss")
-    private LocalDateTime createdAt;
+//    @JsonProperty("created_at")
+//    @JsonFormat(pattern = "yyyyMMdd HH:mm:ss")
+//    private String createdAt;
 
     @JsonProperty("updated_at")
-    @JsonFormat(pattern = "yyyyMMdd HH:mm:ss")
-    private LocalDateTime updatedAt;
+    private String updatedAt;
 }

@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/room_type")
 @RequiredArgsConstructor
 @Slf4j
-@CrossOrigin(origins = "*")
 public class RoomTypeController extends BaseRestController{
 
      private final RoomTypeService roomTypeService;
@@ -21,6 +20,11 @@ public class RoomTypeController extends BaseRestController{
          roomTypeService.createRoomType(payload);
          return ok();
      }
+
+        @GetMapping
+        public Object getRoomType() {
+            return roomTypeService.getRoomType();
+        }
 
 
 
