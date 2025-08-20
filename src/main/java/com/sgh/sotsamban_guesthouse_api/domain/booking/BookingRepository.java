@@ -20,10 +20,13 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
            tr.sts           AS room_type_sts,
            tr.room_num      AS room_number,
            tbg.fname        AS first_name,
-           tbg.lname        AS last_name
+           tbg.lname        AS last_name,
+              trt.type_nm AS room_type_name,
+              trt.rt_id AS room_type_id
         from tb_booking tbbk
              join tb_room tr on tbbk.room_id = tr.room_id
              join tb_guest tbg on tbbk.guest_id = tbg.guest_id
+            join tb_room_type trt on tr.room_type_id = trt.rt_id
     """, nativeQuery = true)
     Page<IBooking> findAllBookings(String startDate, String endDate, String searchValue, Pageable pageable);
 }

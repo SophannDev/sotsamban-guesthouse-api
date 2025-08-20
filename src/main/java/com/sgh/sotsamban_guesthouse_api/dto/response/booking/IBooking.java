@@ -41,4 +41,14 @@ public interface IBooking {
 
     @Value("#{target.last_name}")
     String getLastName();
+
+    @Value("#{target.room_type_name}")
+    String getRoomTypeName();
+
+    @Value("#{target.room_status}")
+    String getRoomStatus();
+
+
+
+
 }

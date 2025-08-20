@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.List;
+
 @Getter
 @Setter
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
@@ -16,7 +18,7 @@ public class BookingRequest {
 
     private String actualCheckOut;
 
-    private BookingStatus bookingStatus = BookingStatus.ACTIVE;
+    private BookingStatus bookingStatus;
 
     private BigDecimal totalAmount;
 

@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @Setter
 @Builder
 @NoArgsConstructor
-public class Payment extends BaseEntity {
+public class   Payment extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pay_id")
@@ -33,10 +33,10 @@ public class Payment extends BaseEntity {
 
     @Convert(converter = PaymentStatus.Converter.class)
     @Column(name = "pay_sts")
-    private PaymentStatus paymentStatus = PaymentStatus.PENDING;
+    private PaymentStatus paymentStatus;
 
     @Column(name = "pay_dt")
-    private LocalDateTime paymentDate = LocalDateTime.now();
+    private String paymentDate;
 
     @Column(name = "notes", columnDefinition = "TEXT")
     private String notes;
@@ -47,7 +47,7 @@ public class Payment extends BaseEntity {
 
     @Builder
     public Payment(Long paymentId, BigDecimal amountPaid, PaymentMethodStatus paymentMethod,
-                   PaymentStatus paymentStatus, LocalDateTime paymentDate, String notes, Booking booking) {
+                   PaymentStatus paymentStatus, String paymentDate, String notes, Booking booking) {
         this.paymentId = paymentId;
         this.amountPaid = amountPaid;
         this.paymentMethod = paymentMethod;

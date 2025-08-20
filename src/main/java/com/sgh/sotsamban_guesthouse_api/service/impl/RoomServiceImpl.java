@@ -56,12 +56,36 @@ public class RoomServiceImpl implements RoomService {
         var roomsResponse = roomList.stream()
                 .map(r -> {
 
+                    var roomTypeName = "";
+                    var roomStatus = "";
+
+                    if (r.getRoomTypeName().equals("1")) {
+                        roomTypeName = "Single Bed";
+                    } else if (r.getRoomTypeName().equals("2")) {
+                        roomTypeName = "Double Bed";
+                    } else {
+                        roomTypeName = "Unknown Type";
+                    }
+
+                    if (r.getStatus().equals("1")) {
+                        roomStatus = "Available";
+                    } else if (r.getStatus().equals("2")) {
+                        roomStatus = "Occupied";
+                    } else if (r.getStatus().equals("3")) {
+                        roomStatus = "Maintenance";
+                    } else {
+                        roomStatus = "Unknown Status";
+                    }
+
                         return RoomResponse.builder()
+                        .roomId(r.getRoomId())
                         .roomNumber(r.getRoomNumber())
-                        .roomTypeName(r.getRoomTypeName())
+                        .roomTypeId(r.getRoomTypeName())
+                        .roomTypeName(roomTypeName)
                         .pricePerNight(r.getPricePerNight())
                         .basePrice(r.getBasePrice())
                         .status(r.getStatus())
+                        .statusLabel(roomStatus)
                         .image(r.getImageUrl())
                         .build();
                 })

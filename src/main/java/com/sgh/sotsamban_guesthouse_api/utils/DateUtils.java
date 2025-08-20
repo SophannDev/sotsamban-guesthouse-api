@@ -1,111 +1,49 @@
 package com.sgh.sotsamban_guesthouse_api.utils;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.TextStyle;
-import java.util.Locale;
 
 public class DateUtils {
 
-    private static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+    // Predefined formatters
+    private static final DateTimeFormatter COMPACT_FORMATTER = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+    private static final DateTimeFormatter STANDARD_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     /**
-     * Parse YYYYMMDDHHmmss string to LocalDateTime then back to String
-     * @param dateTimeString "20250806114558"
-     * @return String "20250806114558" (validated and formatted)
+     * Format LocalDateTime to compact string: yyyyMMddHHmmss
+     * Example: 2025-08-20T10:54:23.626727 -> 20250820105423
      */
-    public static String parseFromYYYYMMDDHHmmss(String dateTimeString) {
-        if (dateTimeString == null || dateTimeString.trim().isEmpty()) {
+    public static String toCompactString(LocalDateTime dateTime) {
+        if (dateTime == null) {
             return null;
         }
-
-        // Validate format by parsing then formatting back
-        try {
-            LocalDateTime dateTime = LocalDateTime.parse(dateTimeString, DATETIME_FORMATTER);
-            return dateTime.format(DATETIME_FORMATTER);
-        } catch (Exception e) {
-            throw new IllegalArgumentException("Invalid datetime format. Expected: yyyyMMddHHmmss (e.g., 20250806114558)");
-        }
+        return dateTime.format(COMPACT_FORMATTER);
     }
 
     /**
-     * Get current datetime in YYYYMMDDHHmmss format
-     * @return "20250806114558"
+     * Format LocalDateTime to standard string: yyyy-MM-dd HH:mm:ss
+     * Example: 2025-08-20T10:54:23.626727 -> 2025-08-20 10:54:23
      */
-    public static String getCurrentDateTimeYYYYMMDDHHmmss() {
-        return LocalDateTime.now().format(DATETIME_FORMATTER);
-    }
-
-    /**
-     * Format LocalDateTime to YYYYMMDDHHmmss string
-     * @param dateTime LocalDateTime
-     * @return "20250806114558"
-     */
-    public static String formatToYYYYMMDDHHmmss(LocalDateTime dateTime) {
-        return dateTime != null ? dateTime.format(DATETIME_FORMATTER) : null;
-    }
-
-    /**
-     * Parse YYYYMMDDHHmmss string to LocalDateTime (for internal use)
-     * @param dateTimeString "20250806114558"
-     * @return LocalDateTime 2025-08-06T11:45:58
-     */
-    public static LocalDateTime parseToLocalDateTime(String dateTimeString) {
-        if (dateTimeString == null || dateTimeString.trim().isEmpty()) {
+    public static String toStandardString(LocalDateTime dateTime) {
+        if (dateTime == null) {
             return null;
         }
-        return LocalDateTime.parse(dateTimeString, DATETIME_FORMATTER);
+        return dateTime.format(STANDARD_FORMATTER);
     }
 
     /**
-     * Validate YYYYMMDDHHmmss string format
-     * @param dateTimeString "20250806114558"
-     * @return true if valid format
+     * Format LocalDateTime with custom pattern
      */
-    public static boolean isValidYYYYMMDDHHmmss(String dateTimeString) {
-        if (dateTimeString == null || dateTimeString.length() != 14) {
-            return false;
+    public static String format(LocalDateTime dateTime, String pattern) {
+        if (dateTime == null) {
+            return null;
         }
-        try {
-            LocalDateTime.parse(dateTimeString, DATETIME_FORMATTER);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+        return dateTime.format(DateTimeFormatter.ofPattern(pattern));
     }
 
     /**
-     * Create datetime string for specific date and time
-     * @param year 2025
-     * @param month 8
-     * @param day 6
-     * @param hour 11
-     * @param minute 45
-     * @param second 58
-     * @return "20250806114558"
+     * Get current date time as compact string
      */
-    public static String createDateTimeString(int year, int month, int day, int hour, int minute, int second) {
-        LocalDateTime dateTime = LocalDateTime.of(year, month, day, hour, minute, second);
-        return dateTime.format(DATETIME_FORMATTER);
-    }
-
-    /**
-     * Format YYYYMMDDHHmmss string to "dd MMMM yyyy"
-     * e.g., "20250815225821" -> "15 August 2025"
-     * @param dateTimeString "20250815225821"
-     * @return "15 August 2025"
-     */
-    public static String formatToReadableDate(String dateTimeString) {
-        if (!isValidYYYYMMDDHHmmss(dateTimeString)) {
-            throw new IllegalArgumentException("Invalid datetime format. Expected: yyyyMMddHHmmss");
-        }
-
-        LocalDateTime dateTime = parseToLocalDateTime(dateTimeString);
-
-        int day = dateTime.getDayOfMonth();
-        String month = dateTime.getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH);
-        int year = dateTime.getYear();
-
-        return String.format("%02d %s %d", day, month, year);
+    public static String nowAsCompactString() {
+        return toCompactString(LocalDateTime.now());
     }
 }

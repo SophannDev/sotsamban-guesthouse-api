@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,7 +16,9 @@ public class PaymentRequest {
 
     private Long bookingId;
     private String amountPaid;
-    private String paymentMethod;
+    private Long paymentMethod;
+    private Long paymentStatus;
+    private String paymentDate;
     private String notes;
 
 }

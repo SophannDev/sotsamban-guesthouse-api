@@ -13,19 +13,25 @@ import java.math.BigDecimal;
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class RoomResponse {
 
+    private Long roomId;
     private String roomNumber;
+    private String roomTypeId;
     private String roomTypeName;
     private String status;
+    private String statusLabel;
     private BigDecimal pricePerNight;
     private BigDecimal basePrice;
     private String image;
 
 
     @Builder
-    public RoomResponse(String roomNumber, String roomTypeName, String status, BigDecimal pricePerNight, BigDecimal basePrice, String image) {
+    public RoomResponse(Long roomId, String roomNumber, String roomTypeId, String roomTypeName, String status, String statusLabel, BigDecimal pricePerNight, BigDecimal basePrice, String image) {
+        this.roomId = roomId;
         this.roomNumber = roomNumber;
+        this.roomTypeId = roomTypeId;
         this.roomTypeName = roomTypeName;
         this.status = status;
+        this.statusLabel = statusLabel;
         this.pricePerNight = pricePerNight;
         this.basePrice = basePrice;
         this.image = image;

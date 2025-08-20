@@ -37,9 +37,10 @@ public class Room extends BaseEntity {
     @JoinColumn(name = "room_type_id", nullable = false)
     private RoomType roomType;
 
+    @Enumerated(EnumType.STRING)
     @Convert(converter = RoomStatus.Converter.class)
     @Column(name = "sts")
-    private RoomStatus status = RoomStatus.AVAILABLE;
+    private RoomStatus status;
 
     @Column(name = "prce_per_ngt")
     private BigDecimal pricePerNight;

@@ -8,7 +8,7 @@ import com.sgh.sotsamban_guesthouse_api.components.AbstractEnumConverter;
  * A class can be used for getting RoomStatus enum
  */
 public enum PaymentMethodStatus implements GenericEnum<PaymentMethodStatus, String> {
-        CASH("1"),
+    CASH("1"),
     CREDIT_CARD("2"),
     BANK_TRANSFER("3"),
     ;
